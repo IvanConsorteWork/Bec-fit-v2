@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
-import { filterProducts } from '../redux-tk/productsSlice'
+import { filterProducts, sortProducts } from '../redux-tk/productsSlice'
 
 export default function Filters({setCurrentPage}) {
   const allProducts = useSelector((state) => state.products.allProducts)
@@ -11,6 +11,11 @@ export default function Filters({setCurrentPage}) {
   
   function handleFilter (e, key) {
     dispatch(filterProducts({key: key, value: e.target.value}))
+    setCurrentPage(1)
+  }
+
+  function handleSort (e) {
+    dispatch(sortProducts(e.target.value))
     setCurrentPage(1)
   }
 
@@ -36,24 +41,15 @@ export default function Filters({setCurrentPage}) {
             <option key={e} value={e}>{e}</option>
           )          
         })}
-      </Form.Select>
-      <Form.Select className='m-3' aria-label="Filter by price range" id='FilterByPriceRange'
-        onChange={(e) => dispatch(filterProducts({key: "price", value: e.target.value}))}
+      </Form.Select>  
+      <Form.Select className='m-3' aria-label="Sort by" id='SortBy'
+        onChange={(e) => handleSort(e)}
       >
-        <option key='all' value = "">Filter by price range</option>
-        <option value="10">Bellow $10</option>
-        <option value="25">Bellow $25</option>
-        <option value="50">Bellow $50</option>
-      </Form.Select>   
-      <Form.Select className='m-3' aria-label="Sort by name" id='SortByName'>
-        <option value=''>Sort by name</option>
-        <option value='asc'>A-Z</option>
-        <option value='desc'>Z-A</option>
-      </Form.Select>
-      <Form.Select className='m-3' aria-label="Sort by price range" id='SortByPriceRange'>
-        <option value=''>Sort by price range</option>
-        <option value='asc'>Lower to Higher</option>
-        <option value='desc'>Higher to Lower</option>
+        <option value=''>Sort by</option>
+        <option value='name-asc'>Name (A-Z)</option>
+        <option value='name-des'>Name (Z-A)</option>
+        <option value='price-asc'>Lower cost</option>
+        <option value='price-des'>Higher cost</option>
       </Form.Select>
     </div>
   )

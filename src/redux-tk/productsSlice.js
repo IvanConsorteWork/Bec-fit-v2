@@ -37,6 +37,47 @@ export const productsSlice = createSlice({
         state.currentProducts = state.allProducts
       }
     },
+    sortProducts: (state, action) => {
+      if (action.payload == 'name-asc') {
+        state.currentProducts.sort(function (a, b) {
+          if (a.name > b.name) {
+            return 1;
+          } else if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+        })
+      } else if (action.payload == 'name-des') {
+        state.currentProducts.sort(function (a, b) {
+          if (a.name < b.name) {
+            return 1;
+          } else if (a.name > b.name) {
+            return -1;
+          }
+          return 0;
+        });
+      } else if (action.payload == 'price-asc') {
+        state.currentProducts.sort(function (a, b) {
+          if (a.price > b.price) {
+            return 1;
+          } else if (a.price < b.price) {
+            return -1;
+          }
+          return 0;
+        })
+      } else if (action.payload == 'price-des') {
+        state.currentProducts.sort(function (a, b) {
+          if (a.price < b.price) {
+            return 1;
+          } else if (a.price > b.price) {
+            return -1;
+          }
+          return 0;
+        })
+      } else {
+        console.log('Error')
+      }
+    }
     // sortProducts: (state, action) => {
     //   let { key, value }: SortType = action.payload
     //   state.allProducts = value == 'asc' || ''
@@ -61,6 +102,6 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { filterProducts, getAllProducts, getProductDetails } = productsSlice.actions
+export const { filterProducts, getAllProducts, getProductDetails, sortProducts } = productsSlice.actions
 
 export default productsSlice.reducer
