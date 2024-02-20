@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../redux/actions'
-
+import { getAllProducts } from '../redux-tk/productsSlice'
 import { Col, Container, Row } from "react-bootstrap"
+import { StoreItem } from "../components/StoreItem"
 import Pagination from "../components/Pagination"
 import Navbar from '../components/Navbar';
 import Filters from '../components/Filters';
-import StoreItem from '../components/StoreItem'
 import Footer from '../components/Footer';
-import data from '../data/products.json'
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -17,8 +15,8 @@ export default function Home() {
     dispatch(getAllProducts())
   }, [dispatch])
 
-  const allProducts = useSelector((state) => state.allProducts);
-  const products = useSelector((state) => state.currentProducts);
+  const allProducts = useSelector((state) => state.products.allProducts)
+  const products = useSelector((state) => state.products.currentProducts)
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -45,7 +43,7 @@ export default function Home() {
   return (
   <>
     <Navbar />
-    <Filters />
+    <Filters setCurrentPage = {setCurrentPage}/>
     <Container className='mb-4'>
       <Row className='p-3'>
         <Pagination

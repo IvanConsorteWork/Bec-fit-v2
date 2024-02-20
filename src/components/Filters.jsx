@@ -1,37 +1,44 @@
 import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux'
+import { filterProducts } from '../redux-tk/productsSlice'
 
-export default function Filters() {
-  // const allProducts = useSelector((state: RootState) => state.products.allProducts)
-  // const brands: string[] = allProducts.map(b => b.brand).filter((value, index, array) => array.indexOf(value) === index)
-  // const category: string[] = allProducts.map(b => b.category).filter((value, index, array) => array.indexOf(value) === index)
+export default function Filters({setCurrentPage}) {
+  const allProducts = useSelector((state) => state.products.allProducts)
+  const brands = allProducts.map(b => b.brand).filter((value, index, array) => array.indexOf(value) === index)
+  const category = allProducts.map(b => b.category).filter((value, index, array) => array.indexOf(value) === index)
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  
+  function handleFilter (e, key) {
+    dispatch(filterProducts({key: key, value: e.target.value}))
+    setCurrentPage(1)
+  }
 
   return (
     <div className='bg-dark d-flex justify-content-around pb-3' style={{width: '100%'}}>
       <Form.Select
         className='m-3' aria-label="Filter by brand" id='FilterByBrand'
-        // onChange={(e) => dispatch(filterProducts({key: "brand", value: e.target.value}))}
+        onChange={(e) => handleFilter(e, 'brand')}
       >
         <option key='all' value = "">Filter by brand</option>
-        {/* {brands.map((e) => {
+        {brands.map((e) => {
           return (
             <option key={e} value={e}>{e}</option>
           )          
-        })} */}
+        })}
       </Form.Select>
       <Form.Select className='m-3' aria-label="Filter by category" id='FilterByCategory'
-        // onChange={(e) => dispatch(filterProducts({key: "category", value: e.target.value}))}
+        onChange={(e) => handleFilter(e, 'category')}
       >
         <option key='all' value = "">Filter by category</option>
-        {/* {category.map((e) => {
+        {category.map((e) => {
           return (
             <option key={e} value={e}>{e}</option>
           )          
-        })} */}
+        })}
       </Form.Select>
       <Form.Select className='m-3' aria-label="Filter by price range" id='FilterByPriceRange'
-        // onChange={(e) => dispatch(filterProducts({key: "price", value: e.target.value}))}
+        onChange={(e) => dispatch(filterProducts({key: "price", value: e.target.value}))}
       >
         <option key='all' value = "">Filter by price range</option>
         <option value="10">Bellow $10</option>

@@ -60,7 +60,7 @@ export default function Footer () {
         <Row style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <hr style={{width: '90vw'}}/>
           <h5 style={{backgroundColor: '#212529', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop:'12px', paddingBottom: '12px'}}>
-              © 2022 Henry Becoming-Fit
+              © 2024 Becoming-Fit
           </h5>        
         </Row>
       </Container>

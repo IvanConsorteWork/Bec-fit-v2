@@ -6,7 +6,7 @@ export default function Details() {
   return (
     <>
       <Navbar />
-      {/* <DetailsContainer /> */}
+      <DetailsContainer />
       <Footer />
     </>
   )
