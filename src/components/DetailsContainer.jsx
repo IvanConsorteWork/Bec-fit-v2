@@ -1,8 +1,8 @@
 import { Button, Container, Col, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
+import { decreaseItemQuantity, increaseItemQuantity } from '../redux-tk/cartSlice'
 import { useEffect } from 'react'
 import { formatCurrency } from "../utilities/formatCurrency";
-import { useDispatch } from "react-redux"
 import { getProductDetails } from "../redux-tk/productsSlice"
 import { useParams } from "react-router-dom";
 
@@ -38,14 +38,14 @@ export default function DetailsContainer() {
         </Row>
         <Row>
           {quantity === 0 ? (
-							<Button className='w-100'>+ Addd to Cart</Button>		
+							<Button className='w-100' onClick = {() => dispatch(increaseItemQuantity(product?.id))}>+ Addd to Cart</Button>		
 						) : <div className='d-flex align-items-center flex-column' style={{ gap: ".5rem"}}>
 									<div className='d-flex align-items-center justify-content-center' style={{ gap: ".5rem"}}>
-										<Button>-</Button>
+										<Button onClick = {() => dispatch(decreaseItemQuantity(product?.id))}>-</Button>
 										<div>
 											<span className="fs-3">{quantity}</span>in Cart
 										</div>
-										<Button>+</Button>
+										<Button onClick = {() => dispatch(increaseItemQuantity(product?.id))}>+</Button>
 									</div>
 								  <Button variant='danger' size='sm'>Remove</Button>
 								</div>}
