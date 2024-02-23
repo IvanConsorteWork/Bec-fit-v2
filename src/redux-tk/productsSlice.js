@@ -78,27 +78,6 @@ export const productsSlice = createSlice({
         console.log('Error')
       }
     }
-    // sortProducts: (state, action) => {
-    //   let { key, value }: SortType = action.payload
-    //   state.allProducts = value == 'asc' || ''
-    //   ? state.allProducts.sort(function (a, b) {
-    //     if (a[key] > b[key]) {
-    //       return 1;
-    //     } else if (a[key] < b[key]) {
-    //       return -1;
-    //     }
-    //     return 0;
-    //   })
-    //   : state.allProducts.sort(function (a, b) {
-    //     if (a[key] <b[key]) {
-    //       return 1;
-    //     } else if (a[key] > b[key]) {
-    //       return -1;
-    //     }
-    //     return 0;
-    //   });
-    //   return products
-    // }
   },
 })
 

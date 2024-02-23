@@ -15,7 +15,7 @@ export function CartItem({ id, quantity }) {
                 <div className='text-muted' style={{ fontSize: ".75rem"}}>{formatCurrency(item.price)}</div>            
             </div>
             <div> {formatCurrency(item.price * quantity)}</div>
-            <Button variant='outline-danger' size='sm' onClick={() => removeFromCart(item.id)}>&times;</Button>
+            <Button variant='outline-danger' size='sm'>&times;</Button>
         </Stack>
     )
 }

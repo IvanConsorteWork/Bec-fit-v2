@@ -1,12 +1,16 @@
 import { Offcanvas, Stack } from "react-bootstrap";
 import { CartItem  } from "./CartItem";
+import { useDispatch, useSelector } from 'react-redux';
+import { closeCart } from '../redux-tk/cartSlice';
 import { formatCurrency } from "../utilities/formatCurrency";
 import storeItems from "../data/products.json"
 
-export function ShoppingCart({ isOpen }) {
-	// const { cartItems, closeCart } = useShoppingCart()
+export default function ShoppingCart() {
+	const dispatch = useDispatch ()
+	const displayCart = useSelector((state) => state.cart.isOpen)
+	let cartItems = storeItems.slice(0, 3)
 	return (
-		<Offcanvas show={isOpen} onHide={closeCart} placement='end'>
+		<Offcanvas show={displayCart} onHide={() => dispatch(closeCart())} placement='end'>
 			<Offcanvas.Header closeButton>
 				<Offcanvas.Title>
 						Cart

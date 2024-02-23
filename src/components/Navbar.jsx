@@ -1,11 +1,15 @@
 import { Button, Col, Nav, Navbar as NavbarBs } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import { FaShoppingCart } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleShowCart } from '../redux-tk/cartSlice';
 import title from '../assets/Title.png';
 import SearchInput from './SearchInput';
 import UserMenu from './UserMenu';
 
 export default function Navbar() {
+  const dispatch = useDispatch()
+  const cartQuantity = 3
   return (
     <NavbarBs className='bg-dark d-flex justify-content-around' sticky='top'>
       <Col className='d-flex justify-content-center'>
@@ -25,15 +29,16 @@ export default function Navbar() {
           style={{width: "3rem", height: "3rem", position: "relative"}}
           variant='outline-light'
           className='rounded-circle '
+          onClick = {() => dispatch(toggleShowCart())}
           >
             <FaShoppingCart />
-            {/* {cartQuantity > 0 && (<div 
+            {cartQuantity > 0 && (<div 
             className='rounded-circle bg-danger d-flex justify-content-center align-items-center'
             style={{color: "white", width: "1.5rem", height: "1.5rem", position: "absolute", bottom: "0", right: "0", transform: 'translate(25%, 25%)'}}
             >
               {cartQuantity}
             </div>
-            )} */}
+            )}
           </Button>
         <UserMenu />   
       </Col>           
