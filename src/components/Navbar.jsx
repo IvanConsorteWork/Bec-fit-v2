@@ -9,7 +9,8 @@ import UserMenu from './UserMenu';
 
 export default function Navbar() {
   const dispatch = useDispatch()
-  const cartQuantity = 3
+  const cartQuantity = useSelector((state) => state.cart.cartItems?.reduce((quantity, item) => item.quantity + quantity, 0)
+  )
   return (
     <NavbarBs className='bg-dark d-flex justify-content-around' sticky='top'>
       <Col className='d-flex justify-content-center'>

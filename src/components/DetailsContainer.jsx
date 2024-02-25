@@ -14,9 +14,8 @@ export default function DetailsContainer() {
     dispatch(getProductDetails(getParams.id));
   }, [dispatch]);
 
-  let product = useSelector((state) => state.products.productDetail)
-
-	const quantity = 3
+  const product = useSelector((state) => state.products.productDetail)
+	const quantity = useSelector((state) => state.cart.cartItems?.find(item => item.id === getParams.id)?.quantity || 0)
 
   return (
     <Container style={{display: 'flex', flexDirection: 'row', paddingTop: '50px', paddingBottom: '50px'}}> 

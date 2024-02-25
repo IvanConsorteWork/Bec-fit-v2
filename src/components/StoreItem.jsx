@@ -6,7 +6,7 @@ import { decreaseItemQuantity, increaseItemQuantity, removeFromCart } from '../r
 
 export function StoreItem ({ id, name, price, image}) {
 	const dispatch = useDispatch()
-	const quantity = 3
+	const quantity = useSelector((state) => state.cart.cartItems?.find(item => item.id === id)?.quantity || 0)
 	return (
 		<Card className="h-100"> 
 			<Link to={`/details/${id}`} style={{color: '#212529', textDecoration: 'none'}}>

@@ -3,12 +3,12 @@ import { CartItem  } from "./CartItem";
 import { useDispatch, useSelector } from 'react-redux';
 import { closeCart } from '../redux-tk/cartSlice';
 import { formatCurrency } from "../utilities/formatCurrency";
-import storeItems from "../data/products.json"
 
 export default function ShoppingCart() {
 	const dispatch = useDispatch ()
 	const displayCart = useSelector((state) => state.cart.isOpen)
-	let cartItems = storeItems.slice(0, 3)
+	const cartItems = useSelector((state) => state.cart.cartItems)
+	const storeItems = useSelector((state) => state.products.allProducts)
 	return (
 		<Offcanvas show={displayCart} onHide={() => dispatch(closeCart())} placement='end'>
 			<Offcanvas.Header closeButton>
