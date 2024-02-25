@@ -1,6 +1,6 @@
 import { Button, Container, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux'
-import { decreaseItemQuantity, increaseItemQuantity } from '../redux-tk/cartSlice'
+import { decreaseItemQuantity, increaseItemQuantity, removeFromCart } from '../redux-tk/cartSlice'
 import { useEffect } from 'react'
 import { formatCurrency } from "../utilities/formatCurrency";
 import { getProductDetails } from "../redux-tk/productsSlice"
@@ -47,7 +47,7 @@ export default function DetailsContainer() {
 										</div>
 										<Button onClick = {() => dispatch(increaseItemQuantity(product?.id))}>+</Button>
 									</div>
-								  <Button variant='danger' size='sm'>Remove</Button>
+								  <Button variant='danger' size='sm' onClick = {() => dispatch(removeFromCart(product?.id))}>Remove</Button>
 								</div>}
         </Row>
       </Col>

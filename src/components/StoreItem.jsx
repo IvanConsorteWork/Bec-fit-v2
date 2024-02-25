@@ -2,7 +2,7 @@ import { Button, Card } from "react-bootstrap"
 import { formatCurrency } from "../utilities/formatCurrency"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
-import { decreaseItemQuantity, increaseItemQuantity } from '../redux-tk/cartSlice'
+import { decreaseItemQuantity, increaseItemQuantity, removeFromCart } from '../redux-tk/cartSlice'
 
 export function StoreItem ({ id, name, price, image}) {
 	const dispatch = useDispatch()
@@ -34,7 +34,7 @@ export function StoreItem ({ id, name, price, image}) {
 										</div>
 										<Button onClick = {() => dispatch(increaseItemQuantity(id))}>+</Button>
 									</div>
-								<Button variant='danger' size='sm'>Remove</Button>
+								<Button variant='danger' size='sm' onClick = {() => dispatch(removeFromCart(id))}>Remove</Button>
 								</div>}
 					</div>
 				</Card.Body>	

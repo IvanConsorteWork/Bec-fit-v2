@@ -1,8 +1,11 @@
 import storeItems from "../data/products.json"
 import { Button, Stack } from "react-bootstrap"
 import { formatCurrency } from "../utilities/formatCurrency"
+import { useDispatch } from 'react-redux'
+import { removeFromCart } from "../redux-tk/cartSlice"
 
 export function CartItem({ id, quantity }) {
+    const dispatch = useDispatch()
     const item = storeItems.find(i => i.id === id)
     if (item == null) return null
     return (
@@ -15,7 +18,7 @@ export function CartItem({ id, quantity }) {
                 <div className='text-muted' style={{ fontSize: ".75rem"}}>{formatCurrency(item.price)}</div>            
             </div>
             <div> {formatCurrency(item.price * quantity)}</div>
-            <Button variant='outline-danger' size='sm'>&times;</Button>
+            <Button variant='outline-danger' size='sm' onClick = {() => dispatch(removeFromCart(item.id))} >&times;</Button>
         </Stack>
     )
 }

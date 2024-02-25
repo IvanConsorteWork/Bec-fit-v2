@@ -37,8 +37,14 @@ export const cartSlice = createSlice({
         });
       }
     },
+    removeFromCart: (state, action) => {
+      const existingItem = state.cartItems.find(item => item.id === action.payload);
+      if (existingItem) {
+        state.cartItems = state.cartItems.filter(item => item.id !== existingItem.id)
+      }
+    },
   }
 })
 
-export const { openCart, closeCart, decreaseItemQuantity, increaseItemQuantity, toggleShowCart } = cartSlice.actions
+export const { openCart, closeCart, decreaseItemQuantity, increaseItemQuantity, removeFromCart, toggleShowCart } = cartSlice.actions
 export default cartSlice.reducer
